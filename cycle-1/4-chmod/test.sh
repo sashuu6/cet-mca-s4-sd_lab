@@ -1,1 +1,0 @@
-echo "execution of script means that the permission is set correct"
