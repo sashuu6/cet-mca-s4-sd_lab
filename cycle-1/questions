@@ -1,0 +1,13 @@
+use these commands along with its various options.
+
+1. echo, read
+2. more, less
+3. man
+4. chmod, chown
+5. cd, mkdir, pwd, ls, find
+6. cat, mv, cp, rm
+7. wc, cut, paste
+8. head, tail, grep, expr
+9. Redirections & Piping
+10. useradd, usermod, userdel, passwd
+11. tar
