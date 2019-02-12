@@ -1,0 +1,10 @@
+while :
+do
+	echo -e "Calculator\n1.Addition\n2.Substraction\n3.Multiplication\n4.Division";
+	echo "Enter your choice";
+	read ch;
+	if [ $ch == 1 ]
+	then
+		echo "Addition";
+	fi
+done
