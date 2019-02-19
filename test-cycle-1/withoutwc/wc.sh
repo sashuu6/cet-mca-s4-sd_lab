@@ -18,9 +18,19 @@ while read p; do
 	  then
 	  	digits_count=$((digits_count+1));
 	  fi
+	  if [[ "${p:$i:1}" = " " ]]
+	  then
+	  	if [[ "${p:$i+1:1}" != " " ]]
+	  	then
+	  		word_count=$((word_count+${#p[@]}));
+	  	fi
+	  fi
 	  character_count=$((character_count+1));
   done
- word_count=$((word_count+${#p[@]}));
+  if [[ ${#p} != 0 ]]
+  then
+  	word_count=$((word_count+1));
+  fi
  line_count=$((line_count+1));
 done < $1
 echo "line count $line_count";
