@@ -40,26 +40,32 @@ while read r; do
 	if [[ ${r%%.*} -ge ${a%%.*} ]]
 	then
 		grade[A]=`expr ${grade[A]} + 1`
+		#echo "A";
 	elif [[ ${r%%.*} -ge ${b%%.*} ]]
 	then
 		grade[B]=`expr ${grade[B]} + 1`
+		#echo "B";
 	elif [[ ${r%%.*} -ge ${c%%.*} ]]
 	then
 		grade[C]=`expr ${grade[C]} + 1`
+		#echo "C";
 	elif [[ ${r%%.*} -ge ${d%%.*} ]]
 	then
 		grade[D]=`expr ${grade[D]} + 1`
+		#echo "D";
 	elif [[ ${r%%.*} -ge ${e%%.*} ]]
 	then
 		grade[E]=`expr ${grade[E]} + 1`
+		#echo "E";
 	elif [[  ${r%%.*} -le ${e%%.*} ]]
 	then
 		grade[F]=`expr ${grade[F]} + 1`
+		#echo "F";
 	fi
 done < temp
 
 for k in "${!grade[@]}"
 do 
-qw=${grade[$k]}
-echo "$k `printf '*%.0s' {1..$qw}`"
+	his=${grade[$k]}
+	echo "$k `yes "*" | head -n $his`"
 done
