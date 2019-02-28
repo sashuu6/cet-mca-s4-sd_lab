@@ -1,7 +1,7 @@
 count=0;
 tmp=0;
 tmp1=0;
-awk -F "," 'total_marks= $4+$5+$6+$7+$8+$9+$10 { print total_marks } ' file.csv > temp;
+awk -F "," 'total_marks= $4+$5+$6+$7+$8+$9+$10 { print total_marks } ' $1 > temp;
 while read p; do
 	summ=$((summ+$p));
 	count=$((count+1));
@@ -67,5 +67,5 @@ done < temp
 for k in "${!grade[@]}"
 do 
 	his=${grade[$k]}
-	echo "$k `yes "*" | head -n $his`"
+	echo "$k `yes "*" | head -n $his | tr '\n' ' '`"
 done
