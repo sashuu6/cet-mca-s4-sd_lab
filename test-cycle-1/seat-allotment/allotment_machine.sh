@@ -52,9 +52,13 @@ do
     echo "Room name: ${room_collection_name[i]}";
     for j in `seq 0 $((${room_collection_size[i]}-1))`
     do
-        if [[ $room_collection_type -eq 1 ]]
+        if [[ ${room_collection_type[i]} -eq 1 ]]
         then
-            echo "test"
+            echo -e "yr1 \t yr2 \t yr3"
+        fi
+        if [[ ${room_collection_type[i]} -eq 2 ]]
+        then
+            echo -e "\tyr1 \n\tyr2 \n\tyr3"
         fi
     done
 done
