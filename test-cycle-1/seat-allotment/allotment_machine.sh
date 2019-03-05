@@ -46,7 +46,16 @@ room_collection_name=( $(cut -d ',' -f2 data-folder/room-data.csv ))
 room_collection_type=( $(cut -d ',' -f3 data-folder/room-data.csv ) );
 #To get room size (number of seats)
 room_collection_size=( $(cut -d ',' -f4 data-folder/room-data.csv ) );
-
+#To get yr1 student name
+yr1_student_name=( $(cut -d ',' -f2 data-folder/student_data-yr1.csv ) );
+#To get yr2 student name
+yr2_student_name=( $(cut -d ',' -f2 data-folder/student_data-yr2.csv ) );
+#To get yr3 student name
+yr3_student_name=( $(cut -d ',' -f2 data-folder/student_data-yr3.csv ) );
+#To print design sheet
+yr1=1;
+yr2=1;
+yr3=1;
 for i in `seq 0 $((${total_room_count[@]}-1))`
 do
     echo "Room name: ${room_collection_name[i]}";
@@ -54,7 +63,8 @@ do
     do
         if [[ ${room_collection_type[i]} -eq 1 ]]
         then
-            echo -e "yr1 \t yr2 \t yr3"
+            echo -e `if [[ yr1 -le ${#yr1_student_name[@]} ]]; then echo "yr1 ${yr1_student_name[j]} $yr1 \t yr1=$(($yr1 + 1)) ";fi; if [[ yr2 -le ${#yr2_student_name[@]} ]]; then echo "yr2 ${yr2_student_name[j]} \t"; yr2=$((yr2+1)); fi; if [[ yr3 -le ${#yr3_student_name[@]} ]]; then echo "yr3 ${yr3_student_name[j]}"; yr3=$((yr3+1));fi`
+            #echo -e "yr1 ${yr1_student_name[j]}\t yr2 ${yr2_student_name[j]} \t yr3 ${yr3_student_name[j]}"
         fi
         if [[ ${room_collection_type[i]} -eq 2 ]]
         then
