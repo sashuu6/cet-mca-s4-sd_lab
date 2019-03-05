@@ -1,11 +1,11 @@
 #To get the number of seats
-awk -F "," ' { print $4 } ' data-folder/room-data.csv > temp_room_data;
+awk -F "," ' { print $3 } ' data-folder/room-data.csv > temp_room_data;
 #Sum the count of all the seats
 total_room_seats=0;
 total_room_count=0;
 while read seat_count; do
 	total_room_seats=$((total_room_seats+$seat_count));
-    total_room_count=$((total_room_count+1));
+	total_room_count=$((total_room_count+1));
 done < temp_room_data
 echo "Total number of seats: $total_room_seats";
 total_student_count=0;
@@ -35,15 +35,8 @@ echo "Total 3rd students: $yr3_student_count";
 total_student_count=$((total_student_count+yr3_student_count));
 echo "Total student count: $total_student_count";
 #Condition to check if the total number of students are equal to total seats available.
-if [[ $total_room_seats -ne $total_student_count ]]
-then
-    echo "NOT POSSIBLE, ERROR 101";
-    exit 101
-fi
 #To get room name
 room_collection_name=( $(cut -d ',' -f2 data-folder/room-data.csv ))
-#To get room type
-room_collection_type=( $(cut -d ',' -f3 data-folder/room-data.csv ) );
 #To get room size (number of seats)
 room_collection_size=( $(cut -d ',' -f4 data-folder/room-data.csv ) );
 #To get yr1 student name
@@ -53,22 +46,14 @@ yr2_student_name=( $(cut -d ',' -f2 data-folder/student_data-yr2.csv ) );
 #To get yr3 student name
 yr3_student_name=( $(cut -d ',' -f2 data-folder/student_data-yr3.csv ) );
 #To print design sheet
-yr1=1;
-yr2=1;
-yr3=1;
+yr1=0;
+yr2=0;
+yr3=;
 for i in `seq 0 $((${total_room_count[@]}-1))`
 do
     echo "Room name: ${room_collection_name[i]}";
     for j in `seq 0 $((${room_collection_size[i]}-1))`
     do
-        if [[ ${room_collection_type[i]} -eq 1 ]]
-        then
-            echo -e `if [[ yr1 -le ${#yr1_student_name[@]} ]]; then echo "yr1 ${yr1_student_name[j]} $yr1 \t yr1=$(($yr1 + 1)) ";fi; if [[ yr2 -le ${#yr2_student_name[@]} ]]; then echo "yr2 ${yr2_student_name[j]} \t"; yr2=$((yr2+1)); fi; if [[ yr3 -le ${#yr3_student_name[@]} ]]; then echo "yr3 ${yr3_student_name[j]}"; yr3=$((yr3+1));fi`
-            #echo -e "yr1 ${yr1_student_name[j]}\t yr2 ${yr2_student_name[j]} \t yr3 ${yr3_student_name[j]}"
-        fi
-        if [[ ${room_collection_type[i]} -eq 2 ]]
-        then
-            echo -e "\tyr1 \n\tyr2 \n\tyr3"
-        fi
+            echo -e "yr1 ${yr1_student_name[j]}\t yr2 ${yr2_student_name[j]} \t yr3 ${yr3_student_name[j]}"
     done
 done
