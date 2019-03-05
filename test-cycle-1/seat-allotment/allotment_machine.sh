@@ -1,9 +1,11 @@
 #To get the number of seats
-awk -F "," ' { print $3 } ' data-folder/room-data.csv > temp_room_data;
+awk -F "," ' { print $4 } ' data-folder/room-data.csv > temp_room_data;
 #Sum the count of all the seats
 total_room_seats=0;
+total_room_count=0;
 while read seat_count; do
 	total_room_seats=$((total_room_seats+$seat_count));
+    total_room_count=$((total_room_count+1));
 done < temp_room_data
 echo "Total number of seats: $total_room_seats";
 total_student_count=0;
@@ -32,9 +34,27 @@ done < temp_student_data
 echo "Total 3rd students: $yr3_student_count";
 total_student_count=$((total_student_count+yr3_student_count));
 echo "Total student count: $total_student_count";
-#Condition to check if all the number of students are equal to total seats available.
+#Condition to check if the total number of students are equal to total seats available.
 if [[ $total_room_seats -ne $total_student_count ]]
 then
     echo "NOT POSSIBLE, ERROR 101";
     exit 101
 fi
+#To get room name
+room_collection_name=( $(cut -d ',' -f2 data-folder/room-data.csv ))
+#To get room type
+room_collection_type=( $(cut -d ',' -f3 data-folder/room-data.csv ) );
+#To get room size (number of seats)
+room_collection_size=( $(cut -d ',' -f4 data-folder/room-data.csv ) );
+
+for i in `seq 0 $((${total_room_count[@]}-1))`
+do
+    echo "Room name: ${room_collection_name[i]}";
+    for j in `seq 0 $((${room_collection_size[i]}-1))`
+    do
+        if [[ $room_collection_type -eq 1 ]]
+        then
+            echo "test"
+        fi
+    done
+done
