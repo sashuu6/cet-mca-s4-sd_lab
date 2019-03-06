@@ -54,10 +54,24 @@ do
 	echo "Room name: ${room_collection_name[i]}";
 	for j in `seq 0 $((${room_collection_size[i]}-1))`
 	do
-		if [[ $yr1 -le ${#yr1_student_name[@]} ]]
-		then
-			echo "yr1 ${yr1_student_name[j]}";
-			yr1=$(($yr1+1));
-		fi
+        if [[ $(($j%2)) -eq 0 ]]
+        then
+            if [[ $yr1 -lt ${#yr1_student_name[@]} ]]
+		    then
+			    echo "yr1 ${yr1_student_name[yr1]}";
+			    yr1=$(($yr1+1));
+            elif [[ $yr1 -eq ${#yr1_student_name[@]} ]]
+            then
+                echo "yr3 ${yr1_student_name[yr3]}";
+                yr3=$(($yr3+1));
+            fi
+        elif [[ $(($j%2)) -eq 1 ]]
+        then
+            if [[ $yr2 -lt ${#yr2_student_name[@]} ]]
+		    then
+			    echo "yr2 ${yr2_student_name[yr2]}";
+			    yr2=$(($yr2+1));
+		    fi
+        fi
 	done
 done
