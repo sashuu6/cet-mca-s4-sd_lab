@@ -73,5 +73,5 @@ do
 			    yr2=$(($yr2+1));
 		    fi
         fi
-	done
-done
+	done 
+done > seat_allotment
