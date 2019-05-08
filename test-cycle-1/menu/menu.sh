@@ -45,6 +45,6 @@ do
 	fi
 	if [ $ch == 5 ]
 	then
-		exit 1;
+		exit 0;
 	fi
 done
